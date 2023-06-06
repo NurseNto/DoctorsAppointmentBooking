@@ -32,6 +32,7 @@ app.delete('/appointments/:id', db.deleteAppointments)
 // patients endpoints and methods
 app.get('/patients', db.getPatients)
 app.get('/patients/:id', db.getPatientsById)
+app.post('/patient/auth', db.loginPatient)
 app.post('/patients', db.createPatients)
 app.put('/patients/:id', db.updatePatients)
 app.delete('/patients/:id', db.deletePatients)

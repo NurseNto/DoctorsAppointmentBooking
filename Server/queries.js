@@ -141,6 +141,18 @@ const getAppointments = (request, response) => {
     })
   }
 
+  const loginPatient = (request, response) => {
+    const {email, password } = request.body
+
+    pool.query('SELECT * FROM patients WHERE email = $1, password = $2', [email, password], (error, results) => {
+      if (error) {
+        throw error
+      }
+      response.status(200).json(results.rows)
+    })
+  }
+
+
   const getPatientsById = (request, response) => {
     const id = parseInt(request.params.id)
   
@@ -266,6 +278,7 @@ const getAppointments = (request, response) => {
     getPatients,
     getPatientsById,
     createPatients,
+    loginPatient,
     updatePatients,
     deletePatients, 
     getDoctors,
