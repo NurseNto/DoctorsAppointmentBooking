@@ -165,9 +165,9 @@ const getAppointments = (request, response) => {
   }
 
   const createPatients = (request, response) => {
-    const { name, contact_number, email, date_of_birth, address, medical_history, notes } = request.body
+    const { name, contact_number, email, password, date_of_birth, gender, address, medical_history, notes, medical_aid_number, medical_aid_name } = request.body
   
-    pool.query('INSERT INTO patients (name, contact_number, email, date_of_birth, address, medical_history, notes) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *', [name, contact_number, email, date_of_birth, address, medical_history, notes], (error, results) => {
+    pool.query('INSERT INTO patients (name, contact_number, email, password, date_of_birth, gender, address, medical_history, notes, medical_aid_number, medical_aid_name) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *', [name, contact_number, email, password, date_of_birth, gender, address, medical_history, notes, medical_aid_number, medical_aid_name], (error, results) => {
       if (error) {
         throw error
       }
