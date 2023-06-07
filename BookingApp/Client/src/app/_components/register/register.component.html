@@ -1,4 +1,4 @@
-<form formGroup="fb" ngSubmit="onSubmit">
+<form [formGroup]="fb" (ngSubmit)="onSubmit()">
 <section class="h-100 h-custom gradient-custom-2">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -16,8 +16,8 @@
                     <div class="col-md-6 mb-4 pb-2">
 
                       <div class="form-outline">
-                        <input type="text" id="name" (ngModel)="name" formControlName="name" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Examplev2">Full   name</label>
+                        <input type="text" id="name" formControlName="name" class="form-control form-control-lg" />
+                        <label class="form-label" for="name">Full name</label>
                       </div>
 
                     </div>
@@ -36,20 +36,20 @@
                     <h6 class="mb-2 pb-1">Gender: </h6>
   
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender"
-                        value="option1" checked />
+                      <input class="form-check-input" type="radio"  formControlName="gender" id="femaleGender"
+                        value="Female" checked />
                       <label class="form-check-label" for="femaleGender">Female</label>
                     </div>
   
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender"
-                        value="option2" />
+                      <input class="form-check-input" type="radio" formControlName="gender" id="maleGender"
+                        value="Male" />
                       <label class="form-check-label" for="maleGender">Male</label>
                     </div>
   
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender"
-                        value="option3" />
+                      <input class="form-check-input" type="radio" formControlName="gender" id="otherGender"
+                        value="Other" />
                       <label class="form-check-label" for="otherGender">Other</label>
                     </div>
                     
@@ -60,8 +60,8 @@
                     <div class="col-md-6 mb-4 pb-2">
 
                       <div class="form-outline">
-                        <input type="text" id="contact_number"  ngModel="contact_number" formControlName="contact_number" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Examplev2">Contact Number</label>
+                        <input type="text" id="contact_number" formControlName="contact_number" class="form-control form-control-lg" />
+                        <label class="form-label" for="contact_number">Contact Number</label>
                       </div>
 
                     </div>
@@ -72,16 +72,20 @@
                     <div class="col-md-6 mb-4 pb-2">
 
                       <div class="form-outline">
-                        <input type="text" id="email" formControlName="email" class="form-control form-control-lg" />
+                        <input type="email" id="email" formControlName="email" required class="form-control form-control-lg" />
                         <label class="form-label" for="form3Examplev2">Email</label>
+                        <div *ngIf="fb.get('email')?.invalid && fb.get('email')?.touched">
+                          <div *ngIf="fb.get('email')?.errors?.['required']">Email is required </div>
+                          <div *ngIf="fb.get('email')?.errors?.['email']">Invalid Email</div>
+                        </div>
                       </div>
 
                     </div>
                     <div class="col-md-6 mb-4 pb-2">
 
                       <div class="form-outline">
-                        <input type="text" id="form3Examplev3" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Examplev3">Password</label>
+                        <input type="password" id="password" formControlName="password" required class="form-control form-control-lg" />
+                        <label class="form-label" for="password">Password</label>
                       </div>
 
                     </div>
@@ -97,15 +101,15 @@
 
                   <div class="mb-4 pb-2">
                     <div class="form-outline form-white">
-                      <input type="text" id="form3Examplea2" class="form-control form-control-lg" />
-                      <label class="form-label" for="form3Examplea2">Address</label>
+                      <input type="text" id="address" formControlName="address" class="form-control form-control-lg" />
+                      <label class="form-label" for="address">Address</label>
                     </div>
                   </div>
 
                   <div class="mb-4 pb-2">
                     <div class="form-outline form-white">
-                      <input type="text" id="form3Examplea3" class="form-control form-control-lg" />
-                      <label class="form-label" for="form3Examplea3">Medical History</label>
+                      <input type="text" id="medical_history" formControlName="medical_history" class="form-control form-control-lg" />
+                      <label class="form-label" for="medical_history">Medical History</label>
                     </div>
                   </div>
 
@@ -113,35 +117,27 @@
 
                   <div class="mb-4 pb-2">
                     <div class="form-outline form-white">
-                      <input type="text" id="form3Examplea6" class="form-control form-control-lg" />
-                      <label class="form-label" for="form3Examplea6">Allergies</label>
+                      <input type="text" id="notes" formControlName="notes" class="form-control form-control-lg" />
+                      <label class="form-label" for="notes">Allergies</label>
                     </div>
                   </div>
 
                   <div class="mb-4 pb-2">
                     <div class="form-outline form-white">
-                      <input type="text" id="form3Examplea6" class="form-control form-control-lg" />
-                      <label class="form-label" for="form3Examplea6">Medical Aid</label>
+                      <input type="text" id="medical_aid_name" formControlName="medical_aid_name" class="form-control form-control-lg" />
+                      <label class="form-label" for="medical_aid_name">Medical Aid Name</label>
                     </div>
                   </div>
 
                   <div class="mb-4">
                     <div class="form-outline form-white">
-                      <input type="text" id="form3Examplea9" class="form-control form-control-lg" />
-                      <label class="form-label" for="form3Examplea9">Medical Number</label>
+                      <input type="text" id="medical_aid_number" formControlName="medical_aid_number" class="form-control form-control-lg" />
+                      <label class="form-label" for="medical_aid_number">Medical Number</label>
                     </div>
                   </div>
-
-                  <div class="form-check d-flex justify-content-start mb-4 pb-3">
-                    <input class="form-check-input me-3" type="checkbox" value="" id="form2Example3c" />
-                    <label class="form-check-label text-white" for="form2Example3">
-                      I do accept the <a href="#!" class="text-white"><u>Terms and Conditions</u></a> of your
-                      site.
-                    </label>
-                  </div>
-
-                  <button type="button" class="btn btn-light btn-lg"
-                    data-mdb-ripple-color="dark">Register</button>
+                  
+                  <button type="submit" class="btn btn-light btn-lg"
+                    data-mdb-ripple-color="dark" >Register</button>
 
                 </div>
               </div>

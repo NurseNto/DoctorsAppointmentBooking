@@ -8,7 +8,7 @@ export interface Patient {
     contact_number: string;
     address?: string;
     medical_history?: string;
-    medicalAidNumber?: string;
-    medicalAidName?: string;
+    medical_aid_number?: string;
+    medical_aid_name?: string;
     notes?: string;
 }

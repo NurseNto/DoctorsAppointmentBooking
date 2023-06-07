@@ -8,7 +8,7 @@ import { Patient } from '../models/patient';
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:4200';
+  private apiUrl = 'http://localhost:4000';
 
   constructor(private http: HttpClient) { }
 

@@ -144,7 +144,7 @@ const getAppointments = (request, response) => {
   const loginPatient = (request, response) => {
     const {email, password } = request.body
 
-    pool.query('SELECT * FROM patients WHERE email = $1, password = $2', [email, password], (error, results) => {
+    pool.query('SELECT * FROM patients WHERE email = $1 AND password = $2', [email, password], (error, results) => {
       if (error) {
         throw error
       }
@@ -171,7 +171,8 @@ const getAppointments = (request, response) => {
       if (error) {
         throw error
       }
-      response.status(201).send(`Patient added with ID: ${results.rows[0].id}`)
+      const responseBody = { message: `Patient added with ID: ${results.rows[0].id}` };
+      response.status(201).json(responseBody);
     })
   }
 
