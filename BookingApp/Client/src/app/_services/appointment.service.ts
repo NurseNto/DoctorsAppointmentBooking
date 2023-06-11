@@ -8,7 +8,7 @@ import { Appointment } from '../models/appointment';
 })
 export class AppointmentService {
 
-  private apiUrl = 'http://localhost:4200/appointments';
+  private apiUrl = 'http://localhost:4000/appointments';
 
   constructor(private http: HttpClient) { }
 

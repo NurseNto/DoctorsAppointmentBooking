@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './_components/login/login.component';
 import { RegisterComponent } from './_components/register/register.component';
 import { AppointmentComponent } from './_components/appointment/appointment.component';
+import { HomeComponent } from './_components/home/home.component';
 
 
 
@@ -16,7 +17,8 @@ import { AppointmentComponent } from './_components/appointment/appointment.comp
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    AppointmentComponent
+    AppointmentComponent, 
+    HomeComponent
   ],
   imports: [
     BrowserModule,
