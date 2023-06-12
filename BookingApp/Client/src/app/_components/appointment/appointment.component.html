@@ -3,10 +3,7 @@
   <form (ngSubmit)="bookAppointment()">
     <div>
       <label for="doctor">Doctor:</label>
-      <select id="doctor" [(ngModel)]="appointment.doctor_id" required>
-        <!-- Populate the dropdown with doctor options -->
-        <option *ngFor="let doctor of doctors" [value]="doctors[0]">{{ doctors[0]}}</option>
-      </select>
+      
     </div>
     <div>
       <label for="appointmentDate">Appointment Date:</label>
@@ -20,3 +17,28 @@
     <button type="submit">Book Appointment</button>
   </form>
 </div>
+
+<owl-date-time-inline [(ngModel)]="dateTime3"></owl-date-time-inline>
+
+<div>
+  <h2>Book Appointment</h2>
+  <form [formGroup]="appointmentForm" (ngSubmit)="bookAppointment()">
+    <div>
+      <label for="doctor">Doctor:</label>
+      <!-- <select id="doctor" formControlName="doctor" required>
+        <option *ngFor="let doctor of doctors" [value]="doctor.id">{{ doctor.name }}</option>
+      </select> -->
+    </div>
+    <div>
+      <label for="appointmentDate">Appointment Date:</label>
+      <input type="date" id="appointmentDate" formControlName="appointment_date" required>
+    </div>
+    <div>
+      <label for="appointmentTime">Appointment Time:</label>
+      <input type="time" id="appointmentTime" formControlName="appointment_time" required>
+    </div>
+    <!-- Add other appointment details fields here -->
+    <button type="submit">Book Appointment</button>
+  </form>
+</div>
+

@@ -13,17 +13,17 @@ export class RegisterComponent implements OnInit {
 
   fb!: FormGroup;
   patient!: Patient;
-  name!: string;
-  email!:string;
-  password!: string;
-  date_of_birth!: Date;
-  gender: any;
-  contact_number: any;
-  address?: string;
-  medical_history?: string;
-  medical_aid_number?: string;
-  medical_aid_name?: string;
-  notes?: string;
+  // name!: string;
+  // email!:string;
+  // password!: string;
+  // date_of_birth!: Date;
+  // gender: any;
+  // contact_number: any;
+  // address?: string;
+  // medical_history?: string;
+  // medical_aid_number?: string;
+  // medical_aid_name?: string;
+  // notes?: string;
 
 
   constructor(private patientService:PatientService) { }

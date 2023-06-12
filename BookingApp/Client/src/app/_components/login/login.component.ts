@@ -11,6 +11,8 @@ import { AuthService } from 'src/app/_services/Auth.service';
 export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
+  email!: string;
+  rememberMe!: boolean;
   
 
   constructor(private auth:AuthService, private formB: FormBuilder, private router: Router) { 
@@ -30,8 +32,13 @@ export class LoginComponent implements OnInit {
      this.auth.login(this.loginForm.value).subscribe(res=>{
       this.router.navigate(['/appoint']);
       console.log("success");
+
+     const user = { email: this.email, rememberMe: this.rememberMe };
+     localStorage.setItem('currentUser', JSON.stringify(user));
       
      })
+
+     
       // Perform login API call or other logic here
       }
   }

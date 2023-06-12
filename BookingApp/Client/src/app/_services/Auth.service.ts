@@ -20,4 +20,9 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/patient/auth`, credentials);
   }
 
+  getLoggedInPatientId(): Observable<number> {
+    // Make an API call to retrieve the logged-in patient ID
+    return this.http.get<number>(`${this.apiUrl}/patients/:id`);
+  }
+
 }
