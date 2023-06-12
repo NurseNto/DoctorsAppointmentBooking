@@ -1,4 +1,59 @@
-
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Container wrapper -->
+    <div class="container">
+      <!-- Navbar brand -->
+      <a class="navbar-brand me-2" href="GP">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzbyT6we3PhtGWUg9ZQgNv9D9BaOQA4Wb65S7e0S5Pgx1d9c4qkFu87a-QxX_iArSO_W0&usqp=CAU"
+          height="60"
+          alt="GP"
+          loading="lazy"
+          style="margin-top: -1px;"
+        />GP
+      </a>
+  
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarButtonsExample"
+        aria-controls="navbarButtonsExample"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+  
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarButtonsExample">
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="#"></a>
+          </li>
+        </ul>
+        <!-- Left links -->
+  
+        <div class="d-flex align-items-center">
+          <button type="button" class="btn btn-link px-3 me-2" routerLink="/login">
+            Login
+          </button>
+          <button type="button" class="btn btn-primary me-3" routerLink="/register">
+                Register
+          </button>
+         
+        </div>
+      </div>
+      <!-- Collapsible wrapper -->
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
 
 <div class="w-screen h-screen bg-base-300 overflow-y-auto"></div>
-<router-outlet></router-outlet>
+
+  <router-outlet></router-outlet>
+
+ 
