@@ -7,6 +7,12 @@ import { PatientService } from 'src/app/_services/patient.service';
 import { Appointment } from 'src/app/models/appointment';
 import { Doctor } from 'src/app/models/doctor';
 import { Patient } from 'src/app/models/patient';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { CalendarEvent, CalendarView } from 'angular-calendar';
+import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours } from 'date-fns';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 
 @Component({
   selector: 'app-appointment',
@@ -14,9 +20,13 @@ import { Patient } from 'src/app/models/patient';
   styleUrls: ['./appointment.component.css']
 })
 export class AppointmentComponent implements OnInit {
-
+  public datePickerConfig!: Partial<BsDatepickerConfig>;
   doctors!: Doctor; // Array to hold the list of doctors
   patients!: Patient;
+  
+  view: string = 'month';
+  viewDate: Date = new Date();
+  appointmentEvents: CalendarEvent[] = []; 
 
   appointment!: Appointment;
   doctor_id: any;
@@ -25,11 +35,17 @@ export class AppointmentComponent implements OnInit {
   appointmentForm!: FormGroup;
   currentUser: any;
   currentDoctor: any;
-dateTime3: any;
+  dateTime3!: Date;
   patient_id: any;
   //doctors =  ['GP', 'Dentist'];
 
-  constructor(private appointmentService: AppointmentService, private doctorService: DoctorsService, private patientService: PatientService, private authService:AuthService, private formBuilder: FormBuilder) { }
+  constructor(private appointmentService: AppointmentService, private doctorService: DoctorsService, private patientService: PatientService, private authService:AuthService, private formBuilder: FormBuilder) { 
+    this.datePickerConfig = Object.assign({}, {
+      containerClass: 'theme-custom',
+      showWeekNumbers: false
+      // Add more configuration options as needed
+    });
+  }
 
    
 
@@ -106,6 +122,13 @@ this.patient_id = patientIdFromStorage !== null ? JSON.parse(patientIdFromStorag
         }
       );
   }
+
+  onSubmit() {
+    // Access the selected date and time value
+    console.log(this.dateTime3);
+    // Perform other actions with the selected date and time
+  }
+
 
 
 }

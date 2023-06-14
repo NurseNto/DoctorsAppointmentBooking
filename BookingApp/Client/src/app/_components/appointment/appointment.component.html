@@ -18,8 +18,20 @@
   </form>
 </div>
 
-<owl-date-time-inline [(ngModel)]="dateTime3"></owl-date-time-inline>
+<br>
 
+<owl-date-time-inline ngModel="dateTime3"></owl-date-time-inline>
+
+<div class="container">
+  <h1>Appointment Booking</h1>
+
+</div>
+
+<app-appointment appointmentEvents="appointmentEvents"></app-appointment>
+
+
+
+<br>
 <div>
   <h2>Book Appointment</h2>
   <form [formGroup]="appointmentForm" (ngSubmit)="bookAppointment()">
