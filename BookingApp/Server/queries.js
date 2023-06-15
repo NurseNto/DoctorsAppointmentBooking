@@ -1,6 +1,7 @@
 // Connecting our database using a pool called pgBouncer - lightweight connection pooler
 // We use pg module to connect with PostgreSQL Database
 
+
 const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'postgres',
@@ -8,7 +9,33 @@ const pool = new Pool({
   database: 'ClinicDB',
   password: 'Letsdoit!',
   port: 5432,
+  url: 'postgres://dbclinic_user:4ZwnZac8cmMlqTU1qfdDutWT666ue00G@dpg-ci5dgpdph6eh6mqkv71g-a.oregon-postgres.render.com/dbclinic'
 })
+
+// const  Pool  = require('pg').Pool
+
+// const connectionString = process.env.DATABASE_URL ;
+
+// const pool = new Pool({
+//   connectionString: connectionString,
+ 
+// });
+
+// const dotenv = require('dotenv')
+// const Pool = require('pg').Pool
+
+// dotenv.config() // Load environment variables from .env file
+
+// const connectionString = process.env.DATABASE_URL
+
+// const pool = new Pool({
+//   connectionString: connectionString,
+//   password: process.env.DB_PASSWORD // Add this line to include the password
+// });
+
+
+
+
 
 // USERS
 

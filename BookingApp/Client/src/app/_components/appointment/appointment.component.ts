@@ -57,7 +57,7 @@ export class AppointmentComponent implements OnInit {
   // this.currentDoctor = JSON.parse(localStorage.getItem('currrentDoctor'));
 
 const doctorIdFromStorage = localStorage.getItem('currentDoctor');
-this.patient_id = doctorIdFromStorage !== null ? JSON.parse(doctorIdFromStorage) : '';
+this.doctor_id = doctorIdFromStorage !== null ? JSON.parse(doctorIdFromStorage) : '';
 
 const patientIdFromStorage = localStorage.getItem('currentPatient');
 this.patient_id = patientIdFromStorage !== null ? JSON.parse(patientIdFromStorage) : '';
@@ -66,7 +66,8 @@ this.patient_id = patientIdFromStorage !== null ? JSON.parse(patientIdFromStorag
   this.appointmentForm = this.formBuilder.group({
     appointment_time: ['', Validators.required],
     appointment_date: ['', Validators.required],
-    doctor: ['', Validators.required],
+    doctor_id: localStorage.getItem('currentDoctor'),
+    patient_id: localStorage.getItem('currentPatient')
     // Add other form fields as needed
   });
   }
@@ -103,31 +104,20 @@ this.patient_id = patientIdFromStorage !== null ? JSON.parse(patientIdFromStorag
   bookAppointment() {
 
     // const appointment = {
-    //   appointment_time: this.appointmentForm.get('appointment_time').value,
-    //   appointment_date: this.appointmentForm.get('appointmentDate').value,
+    //   appointment_time: this.appointment.appointment_time
+    //   appointment_date : this.appointmentForm.get('appointment_date')?.value
     //   doctorId: this.doctor_id
     //   patient_id = this.patient_id
 
     // };
 
-    this.appointmentService.createAppointment(this.appointment)
-      .subscribe(
-        response=> {
-          console.log('Appointment booked:', response);
-          // Redirect to the appointments list or display a success message
-        },
-        (error) => {
-          console.error('Appointment booking failed:', error);
-          // Display an error message
-        }
-      );
+    this.appointmentService.createAppointment(this.appointmentForm.value).subscribe(res=>{
+      this.appointment = res;
+      console.log(this.appointment);
+      
+    })
   }
 
-  onSubmit() {
-    // Access the selected date and time value
-    console.log(this.dateTime3);
-    // Perform other actions with the selected date and time
-  }
 
 
 
