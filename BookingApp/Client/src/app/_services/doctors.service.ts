@@ -20,4 +20,8 @@ private apiUrl = 'http://localhost:4000/doctors';
     return this.http.get(this.apiUrl)
   }
 
+  getDoctorId(){
+    return this.http.get(this.apiUrl + '/id')
+  }
+
 }

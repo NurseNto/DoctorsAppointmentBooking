@@ -7,11 +7,7 @@ import { PatientService } from 'src/app/_services/patient.service';
 import { Appointment } from 'src/app/models/appointment';
 import { Doctor } from 'src/app/models/doctor';
 import { Patient } from 'src/app/models/patient';
-import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { CalendarEvent, CalendarView } from 'angular-calendar';
-import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours } from 'date-fns';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 
 
 @Component({
@@ -20,104 +16,78 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
   styleUrls: ['./appointment.component.css']
 })
 export class AppointmentComponent implements OnInit {
-  public datePickerConfig!: Partial<BsDatepickerConfig>;
-  doctors!: Doctor; // Array to hold the list of doctors
-  patients!: Patient;
-  
-  view: string = 'month';
-  viewDate: Date = new Date();
-  appointmentEvents: CalendarEvent[] = []; 
 
   appointment!: Appointment;
-  doctor_id: any;
-  rememberMe: any;
-  loggedInPatientId!: any;
   appointmentForm!: FormGroup;
-  currentUser: any;
-  currentDoctor: any;
-  dateTime3!: Date;
-  patient_id: any;
-  //doctors =  ['GP', 'Dentist'];
+  loggedInPatient!: number;
+  doctorIdFromDatabase: number | undefined;
+  
 
   constructor(private appointmentService: AppointmentService, private doctorService: DoctorsService, private patientService: PatientService, private authService:AuthService, private formBuilder: FormBuilder) { 
-    this.datePickerConfig = Object.assign({}, {
-      containerClass: 'theme-custom',
-      showWeekNumbers: false
-      // Add more configuration options as needed
-    });
+    
   }
 
    
 
   ngOnInit() {
-    this.loadDoctors();
-    this.loadPatients();
-  this.loggedInPatientId = this.authService.getLoggedInPatientId();
-  // this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-  // this.currentDoctor = JSON.parse(localStorage.getItem('currrentDoctor'));
+    //this.loggedInPatient = this.authService.getLoggedInPatient();
 
-const doctorIdFromStorage = localStorage.getItem('currentDoctor');
-this.doctor_id = doctorIdFromStorage !== null ? JSON.parse(doctorIdFromStorage) : '';
-
-const patientIdFromStorage = localStorage.getItem('currentPatient');
-this.patient_id = patientIdFromStorage !== null ? JSON.parse(patientIdFromStorage) : '';
-
-
-  this.appointmentForm = this.formBuilder.group({
-    appointment_time: ['', Validators.required],
-    appointment_date: ['', Validators.required],
-    doctor_id: localStorage.getItem('currentDoctor'),
-    patient_id: localStorage.getItem('currentPatient')
-    // Add other form fields as needed
-  });
-  }
-
-  loadDoctors(): void {
-    // Call the service to retrieve the list of doctors from the database
-    this.doctorService.getAllDoctors().subscribe(
-      data=>{
-       console.log(data);
-       const user = { doctor_id: this.doctor_id, rememberMe: this.rememberMe };
-       localStorage.setItem('currentDoctor', JSON.stringify(user));
-       
+    this.authService.getLoggedInPatient().subscribe(
+      (patientId: number) => {
+        this.loggedInPatient = patientId;
+        console.log('Logged-in Patient ID:', this.loggedInPatient);
       },
-      (error: any) => {
-        console.log(error);
+      (error) => {
+        console.log('Error retrieving patient ID:', error);
       }
     );
+  
+    this.loadDoctorIdFromDatabase(); // Load the doctor_id from the database
+
+    this.appointmentForm = this.formBuilder.group({
+      appointment_time: ['', Validators.required],
+      appointment_date: ['', Validators.required],
+      doctor_id: [this.doctorIdFromDatabase || '', Validators.required],
+      patient_id: [this.loggedInPatient || '', Validators.required]
+    });
+   
+}
+
+loadDoctorIdFromDatabase() {
+  // Call the appropriate service method to get the doctor_id from the database
+  // Assign the retrieved doctor_id to the `doctorIdFromDatabase` property
+  // You can use a service method like `getDoctorIdFromDatabase()` or any other approach to fetch the doctor_id
+
+  // Example implementation:
+  this.appointmentService.getDoctorIdFromDatabase().subscribe(
+    (doctorId) => {
+      this.doctorIdFromDatabase = doctorId;
+    },
+    (error) => {
+      console.error('Failed to load doctor_id:', error);
+      // Handle error case
+    }
+  );
+}
+
+
+bookAppointment() {
+  if (this.appointmentForm.invalid) {
+    // Handle form validation errors
+    return;
   }
 
-  loadPatients(): void {
-    // Call the service to retrieve the list of patients from the database
-    this.patientService.getPatients().subscribe(
-          data => {
-      console.log(data); 
-      const user = { patient_id: this.patient_id, rememberMe: this.rememberMe };
-       localStorage.setItem('currentPatient', JSON.stringify(user)); 
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    );
-  }
-
-  bookAppointment() {
-
-    // const appointment = {
-    //   appointment_time: this.appointment.appointment_time
-    //   appointment_date : this.appointmentForm.get('appointment_date')?.value
-    //   doctorId: this.doctor_id
-    //   patient_id = this.patient_id
-
-    // };
-
-    this.appointmentService.createAppointment(this.appointmentForm.value).subscribe(res=>{
-      this.appointment = res;
-      console.log(this.appointment);
-      
-    })
-  }
-
+  this.appointmentService.createAppointment(this.appointmentForm.value).subscribe(
+    (response) => {
+      console.log('Appointment created successfully:', response);
+      // Optionally, perform any additional actions after successful creation
+    },
+    (error) => {
+      console.error('Failed to create appointment:', error);
+      // Handle error case
+    }
+  );
+}
 
 
 

@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   email!: string;
   rememberMe!: boolean;
+  isLoggedIn: boolean = false; // Track login status
   
 
   constructor(private auth:AuthService, private formB: FormBuilder, private router: Router) { 
@@ -35,6 +36,9 @@ export class LoginComponent implements OnInit {
 
      const user = { email: this.email, rememberMe: this.rememberMe };
      localStorage.setItem('currentUser', JSON.stringify(user));
+
+     //this.isLoggedIn = true; // Set login status to true
+     this.auth.login2
       
      })
 
