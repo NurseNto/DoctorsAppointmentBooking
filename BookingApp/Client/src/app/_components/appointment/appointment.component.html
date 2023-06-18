@@ -1,22 +1,86 @@
-<h1>Book Appointment</h1>
 
-<form [formGroup]="appointmentForm" (ngSubmit)="bookAppointment()">
-  <div>
-    <label for="appointment_time">Appointment Time:</label>
-    <input type="time" id="appointment_time" formControlName="appointment_time" />
+<section class="h-100 h-custom" style="background-color: #8fc4b7;">
+  <h1 style="text-align: center;">Book Appointment</h1>
+
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-6">
+        <div class="card rounded-3">
+          <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img3.webp"
+            class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
+            alt="Sample photo"> -->
+            <div class="card-img-top">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHXi6kWCo1P3qJAuOnEAs6jWS1Dg1BqRkk8Q&usqp=CAU"
+                class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
+                alt="Sample photo">
+                
+
+            </div>
+          
+            <div class="card-body">
+              <form [formGroup]="appointmentForm" (ngSubmit)="bookAppointment()">
+              <div class="row align-items-center pt-4 pb-3">
+                <div class="col-md-3 ps-5">
+  
+                  <h6 class="mb-0">Date</h6>
+  
+                </div>
+                <div class="col-md-9 pe-5">
+  
+                  <input type="date" class="form-control form-control-lg" formControlName="appointment_date" [value]="appointmentForm.get('appointment_date')?.value | date:'yyyy-mm-dd'">
+  
+                </div>
+              </div>
+  
+              <hr class="mx-n3">
+  
+              <div class="row align-items-center py-3">
+                <div class="col-md-3 ps-5">
+  
+                  <h6 class="mb-0">Time</h6>
+  
+                </div>
+                <div class="col-md-9 pe-5">
+  
+                  <input type="time" class="form-control form-control-lg"  formControlName="appointment_time"/>
+  
+                </div>
+              </div>
+  
+              <hr class="mx-n3">
+  
+              <div class="row align-items-center py-3">
+                <div class="col-md-3 ps-5">
+  
+                  <h6 class="mb-0">Notes</h6>
+  
+                </div>
+                <div class="col-md-9 pe-5">
+  
+                  <textarea class="form-control" rows="3" placeholder="Any other information" formControlName="notes"></textarea>
+  
+                </div>
+              </div>
+
+              <div>
+                <input type="text" hidden id="doctor_id" formControlName="doctor_id" [readonly]="true" />
+              </div>
+              <div>
+                <input type="text" hidden id="patient_id" formControlName="patient_id" [readonly]="true" />
+              </div>
+  
+              <hr class="mx-n3">
+  
+              <div class="px-5 py-4">
+                <button type="submit" [disabled]="appointmentForm.invalid">Book Appointment</button>
+              </div>
+            </form>
+            </div>
+
+          
+
+        </div>
+      </div>
+    </div>
   </div>
-  <div>
-    <label for="appointment_date">Appointment Date:</label>
-    <input type="date" id="appointment_date" formControlName="appointment_date" />
-    <i class="fas fa-calendar "></i>
-  </div>
-  <div>
-    <label for="doctor_id">Doctor ID:</label>
-    <input type="text" id="doctor_id" formControlName="doctor_id" [readonly]="true" />
-  </div>
-  <div>
-    <label for="patient_id">Patient ID:</label>
-    <input type="text" id="patient_id" formControlName="patient_id" [readonly]="true" />
-  </div>
-  <button type="submit" [disabled]="appointmentForm.invalid">Book Appointment</button>
-</form>
+</section>

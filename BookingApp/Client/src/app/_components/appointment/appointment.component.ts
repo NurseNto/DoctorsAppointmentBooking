@@ -7,6 +7,7 @@ import { PatientService } from 'src/app/_services/patient.service';
 import { Appointment } from 'src/app/models/appointment';
 import { Doctor } from 'src/app/models/doctor';
 import { Patient } from 'src/app/models/patient';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -30,44 +31,37 @@ export class AppointmentComponent implements OnInit {
    
 
   ngOnInit() {
-    //this.loggedInPatient = this.authService.getLoggedInPatient();
-
     this.authService.getLoggedInPatient().subscribe(
-      (patientId: number) => {
+     async patientId => {
         this.loggedInPatient = patientId;
         console.log('Logged-in Patient ID:', this.loggedInPatient);
+        await this.loadDoctorIdFromDatabase();
+        this.initializeForm();
       },
       (error) => {
         console.log('Error retrieving patient ID:', error);
       }
-    );
-  
-    this.loadDoctorIdFromDatabase(); // Load the doctor_id from the database
-
-    this.appointmentForm = this.formBuilder.group({
-      appointment_time: ['', Validators.required],
-      appointment_date: ['', Validators.required],
-      doctor_id: [this.doctorIdFromDatabase || '', Validators.required],
-      patient_id: [this.loggedInPatient || '', Validators.required]
-    });
-   
+    ); 
 }
 
-loadDoctorIdFromDatabase() {
-  // Call the appropriate service method to get the doctor_id from the database
-  // Assign the retrieved doctor_id to the `doctorIdFromDatabase` property
-  // You can use a service method like `getDoctorIdFromDatabase()` or any other approach to fetch the doctor_id
+initializeForm() {
+  this.appointmentForm = this.formBuilder.group({
+    appointment_time: ['', Validators.required],
+    appointment_date: ['', Validators.required],
+    doctor_id: [this.doctorIdFromDatabase || '', Validators.required],
+    patient_id: [this.loggedInPatient || '', Validators.required],
+    notes: ''
+  });
+}
 
-  // Example implementation:
-  this.appointmentService.getDoctorIdFromDatabase().subscribe(
-    (doctorId) => {
-      this.doctorIdFromDatabase = doctorId;
-    },
-    (error) => {
-      console.error('Failed to load doctor_id:', error);
-      // Handle error case
-    }
-  );
+async loadDoctorIdFromDatabase() {
+  try {
+    this.doctorIdFromDatabase = await this.appointmentService.getDoctorIdFromDatabase().toPromise();
+    this.appointmentForm.get('doctor_id')?.setValue(this.doctorIdFromDatabase);
+  } catch (error) {
+    console.error('Failed to load doctor_id:', error);
+    // Handle error case
+  }
 }
 
 
