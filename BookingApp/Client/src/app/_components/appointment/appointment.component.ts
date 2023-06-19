@@ -20,7 +20,7 @@ export class AppointmentComponent implements OnInit {
 
   appointment!: Appointment;
   appointmentForm!: FormGroup;
-  loggedInPatient!: number;
+  loggedInPatient: number = 0;
   doctorIdFromDatabase: number | undefined;
   
 
@@ -49,7 +49,7 @@ initializeForm() {
     appointment_time: ['', Validators.required],
     appointment_date: ['', Validators.required],
     doctor_id: [this.doctorIdFromDatabase || '', Validators.required],
-    patient_id: [this.loggedInPatient || '', Validators.required],
+    patient_id: [isNaN(this.loggedInPatient) ? '' : this.loggedInPatient, Validators.required],
     notes: ''
   });
 }
@@ -72,17 +72,10 @@ bookAppointment() {
   }
 
   this.appointmentService.createAppointment(this.appointmentForm.value).subscribe(
-    (response) => {
+    response => {
       console.log('Appointment created successfully:', response);
-      // Optionally, perform any additional actions after successful creation
-    },
-    (error) => {
-      console.error('Failed to create appointment:', error);
-      // Handle error case
-    }
-  );
+      window.location.reload();
+  });
 }
-
-
 
 }

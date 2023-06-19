@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/Auth.service';
 import { PatientService } from 'src/app/_services/patient.service';
 import { Patient } from 'src/app/models/patient';
@@ -26,7 +27,7 @@ export class RegisterComponent implements OnInit {
   // notes?: string;
 
 
-  constructor(private patientService:PatientService) { }
+  constructor(private patientService:PatientService, private router: Router) { }
 
   ngOnInit() {
     this.fb = new FormGroup ({
@@ -67,7 +68,7 @@ export class RegisterComponent implements OnInit {
       this.patientService.createPatient(this.fb.value).subscribe(res=>{
         this.patient = res;
         console.log(res);
-        
+        this.router.navigate(['/login']);
       });
     }      
   }
