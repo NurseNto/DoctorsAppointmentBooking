@@ -11,7 +11,8 @@ export class AuthService {
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
-  private apiUrl = 'http://localhost:4000';
+ // private apiUrl = 'http://localhost:4000';
+  private apiUrl = 'https://bookingbe-tjw1.onrender.com';
 
   constructor(private http: HttpClient) { }
 
