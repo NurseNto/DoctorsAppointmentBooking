@@ -24,4 +24,8 @@ export class PatientService {
     return this.http.get(this.apiUrl)
   }
 
+  getPatientById(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/api/user/update_profile/${id}`)
+  }
+
 }

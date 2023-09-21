@@ -4,98 +4,18 @@
 
 const Pool = require('pg').Pool
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'ClinicDB',
-  password: 'Letsdoit!',
+  user: 'bookingsdb_user',
+  host: 'dpg-ck5u9nb6fquc739sl0j0-a.oregon-postgres.render.com',
+  database: 'bookingsdb',
+  password: 'ZpYPASZUJpk2YDHKGoatORfeJbJ8oCEy',
   port: 5432,
-  url: 'postgres://dbclinic_user:4ZwnZac8cmMlqTU1qfdDutWT666ue00G@dpg-ci5dgpdph6eh6mqkv71g-a.oregon-postgres.render.com/dbclinic'
+  ssl: true,
+  synchronize: true,
+  extra: {
+    trustServerCertificate: true,
+  },
 })
 
-// const  Pool  = require('pg').Pool
-
-// const connectionString = process.env.DATABASE_URL ;
-
-// const pool = new Pool({
-//   connectionString: connectionString,
- 
-// });
-
-// const dotenv = require('dotenv')
-// const Pool = require('pg').Pool
-
-// dotenv.config() // Load environment variables from .env file
-
-// const connectionString = process.env.DATABASE_URL
-
-// const pool = new Pool({
-//   connectionString: connectionString,
-//   password: process.env.DB_PASSWORD // Add this line to include the password
-// });
-
-
-
-
-
-// USERS
-
-const getUsers = (request, response) => {
-    pool.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
-      if (error) {
-        throw error
-      }
-      response.status(200).json(results.rows)
-    })
-  }
-
-  const getUserById = (request, response) => {
-    const id = parseInt(request.params.id)
-  
-    pool.query('SELECT * FROM users WHERE id = $1', [id], (error, results) => {
-      if (error) {
-        throw error
-      }
-      response.status(200).json(results.rows)
-    })
-  }
-
-  const createUser = (request, response) => {
-    const { name, contact_number, email, password } = request.body
-  
-    pool.query('INSERT INTO users (name, contact_number, email, password) VALUES ($1, $2, $3, $4) RETURNING *', [name, contact_number, email, password], (error, results) => {
-      if (error) {
-        throw error
-      }
-      response.status(201).send(`User added with ID: ${results.rows[0].id}`)
-    })
-  }
-
-  const updateUser = (request, response) => {
-    const id = parseInt(request.params.id)
-    const {name, contact_number, email, password } = request.body
-  
-    pool.query(
-      'UPDATE users SET name = $1, contact_number = $2, email = $3, password = $4 WHERE id = $5',
-      [name, contact_number, email, password, id],
-      (error, results) => {
-        if (error) {
-          throw error
-        }
-        response.status(200).send(`User modified with ID: ${id}`)
-      }
-    )
-  }
-
-  const deleteUser = (request, response) => {
-    const id = parseInt(request.params.id)
-  
-    pool.query('DELETE FROM users WHERE id = $1', [id], (error, results) => {
-      if (error) {
-        throw error
-      }
-      response.status(200).send(`User deleted with ID: ${id}`)
-    })
-  }
 
 // APPOINTMENTS
 
@@ -135,7 +55,7 @@ const getAppointments = (request, response) => {
     const { patient_id, doctor_id, appointment_date, appointment_time, notes, status } = request.body
   
     pool.query(
-      'UPDATE appointments SET  appointment_date = $1, appointment_time = $2, notes = $3, status = $4, WHERE id = $5',
+      'UPDATE appointments SET  appointment_date = $1, appointment_time = $2, notes = $3, status = $4 WHERE id = $5',
       [patient_id, doctor_id, appointment_date, appointment_time, notes, status, id],
       (error, results) => {
         if (error) {
@@ -293,11 +213,6 @@ const getAppointments = (request, response) => {
   // Exporting CRUD Functions so that we use them on index.js file
 
   module.exports = {
-    getUsers,
-    getUserById,
-    createUser,
-    updateUser,
-    deleteUser,
     getAppointments,
     getAppointmentById,
     createAppointment,
