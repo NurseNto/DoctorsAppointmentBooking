@@ -45,6 +45,9 @@ export class AppointmentComponent implements OnInit {
     // check if the user variable contains valid user data before initializing the form
     if (this.user && Object.keys(this.user).length > 0){
       this.initializeForm();
+
+          // Use JSON.stringify() to log the user object properties
+    console.log('User data:', JSON.stringify(this.user, null, 2));
     } else{
       console.log('User data not found in session');
     }
