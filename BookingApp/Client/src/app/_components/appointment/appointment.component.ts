@@ -40,7 +40,8 @@ export class AppointmentComponent implements OnInit {
   ngOnInit() {
     // Retrieve the user data from session storage
     this.user = this.session.getLoggedUser();
-    console.log('user data' + this.user);
+    JSON.stringify(this.user)
+    console.log('user got - ' + this.user);
     
     // check if the user variable contains valid user data before initializing the form
     if (this.user && Object.keys(this.user).length > 0){
