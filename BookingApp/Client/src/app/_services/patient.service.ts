@@ -9,7 +9,7 @@ import { Patient } from '../models/patient';
 export class PatientService {
 
   //private apiUrl = 'http://localhost:4000/patients';
-  private apiUrl = 'https://bookingbe-tjw1.onrender.com';
+  private apiUrl = 'https://bookingbe-tjw1.onrender.com/patients';
 
   constructor(private http: HttpClient) { }
 //create a new patient
