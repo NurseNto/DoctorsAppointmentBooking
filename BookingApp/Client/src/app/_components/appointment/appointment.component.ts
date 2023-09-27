@@ -22,6 +22,11 @@ export class AppointmentComponent implements OnInit {
   doctorIdFromDatabase: number | undefined;
   patientIdFromDatabase: number | undefined;
   user!: any;
+  doctorID!: number;
+
+  exampleDoctor = 
+  {doctorID3 : 8}
+
 
   constructor(
     private appointmentService: AppointmentService,
@@ -35,14 +40,22 @@ export class AppointmentComponent implements OnInit {
   ngOnInit() {
     // Retrieve the user data from session storage
     this.user = this.session.getLoggedUser();
+
+    // check if the user variable contains valid user data before initializing the form
+    if (this.user && Object.keys(this.user).length > 0){
+      this.initializeForm();
+    } else{
+      console.log('User data not found in session');
+    }
+    
   }
 
   initializeForm() {
     this.appointmentForm = this.formBuilder.group({
       appointment_time: ["", Validators.required],
       appointment_date: ["", Validators.required],
-      doctor_id: [this.doctorIdFromDatabase || "", Validators.required],
-      patient_id: [this.patientIdFromDatabase, Validators.required],
+      doctor_id: [this.exampleDoctor.doctorID3, Validators.required],
+      patient_id: [this.user.patient_id, Validators.required],
       notes: "",
     });
   }
@@ -57,7 +70,7 @@ export class AppointmentComponent implements OnInit {
       .createAppointment(this.appointmentForm.value)
       .subscribe((response) => {
         console.log("Appointment created successfully:", response);
-        window.location.reload();
+       // window.location.reload();
       });
   }
 }
