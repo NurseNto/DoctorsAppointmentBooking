@@ -7,7 +7,7 @@ const port = 4000
 const cors = require('cors')
 
 app.use(cors({
-  origin: 'http://localhost:4200'
+  origin: '*'
 }))
 
 app.use(bodyParser.json())
