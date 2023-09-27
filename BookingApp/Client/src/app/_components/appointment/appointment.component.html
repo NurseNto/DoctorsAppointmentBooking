@@ -16,9 +16,9 @@
                 
 
             </div>
-          
+            <form [formGroup]="appointmentForm" (ngSubmit)="bookAppointment()">
             <div class="card-body">
-              <form [formGroup]="appointmentForm" (ngSubmit)="bookAppointment()">
+              
               <div class="row align-items-center pt-4 pb-3">
                 <div class="col-md-3 ps-5">
   
@@ -61,14 +61,15 @@
   
                 </div>
               </div>
-              
+
               <hr class="mx-n3">
   
               <div class="px-5 py-4">
-                <button class="btn btn-secondary" type="submit" [disabled]="appointmentForm.invalid">Book Appointment</button>
+                <button class="btn btn-secondary" type="submit" [disabled]="appointmentForm.invalid" (click)="bookAppointment()">Book Appointment</button>
               </div>
-            </form>
+            
             </div>
+          </form>
 
           
 
