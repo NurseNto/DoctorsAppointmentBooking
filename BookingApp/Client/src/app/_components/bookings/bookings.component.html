@@ -1,6 +1,6 @@
 <!-- appointment.component.html -->
 <section class="container">
-  <h1>Welcome, {{ user.name }}</h1>
+  <h1>Welcome, {{ name }}</h1>
 
   <div class="appointment-list">
     <div class="card" *ngFor="let appointment of bookings">
@@ -13,8 +13,8 @@
         <p>Status: {{ appointment.status }}</p>
       </div>
       <div class="card-footer">
-        <button class="btn btn-primary" (click)="editAppointment(appointment)">Edit</button>
-        <button class="btn btn-danger" (click)="deleteAppointment(appointment)">Delete</button>
+        <button class="btn btn-primary" (click)="editAppointment()">Edit</button>
+        <button class="btn btn-danger" (click)="deleteAppointment()">Delete</button>
       </div>
     </div>
   </div>
