@@ -60,4 +60,12 @@ export class AppointmentService {
     // Replace 'userId' with the logged-in user's ID if needed
     return this.http.get<Appointment[]>(`${this.apiUrl}`);
   }
+
+  editAppointments(id: number, appointments: Appointment): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, appointments);
+  }
+
+  deleteAppointments(id: number): Observable <any> {
+    return this.http.delete<any>(`${this.apiUrl}/${id}`)
+  }
 }
