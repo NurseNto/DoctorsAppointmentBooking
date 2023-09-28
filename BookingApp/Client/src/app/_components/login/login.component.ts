@@ -13,8 +13,6 @@ export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
   email!: string;
-  rememberMe!: boolean;
-  isLoggedIn: boolean = false; // Track login status
   
 
   constructor(private auth:AuthService, private formB: FormBuilder, private router: Router, private session: SessionService) { 
@@ -33,7 +31,7 @@ export class LoginComponent implements OnInit {
       // Form is valid, perform login logic
      this.auth.login(this.loginForm.value).subscribe(res=>{
       this.router.navigate(['/home']);
-      console.log("success");
+      console.log("success" + res);
       this.session.saveLoggedUser(res);
       
      })

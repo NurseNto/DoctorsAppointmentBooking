@@ -3,16 +3,23 @@
   <h1>Welcome, {{ user.name }}</h1>
 
   <div class="appointment-list">
-    <ul>
-      <li *ngFor="let appointment of bookings">
-        Date: {{ appointment.appointment_date | date: 'dd/MM/yyyy' }},
-        Time: {{ appointment.appointment_time }}
-      </li>
-    </ul>
+    <div class="card" *ngFor="let appointment of bookings">
+      <div class="card-header">
+        Appointment Details
+      </div>
+      <div class="card-body">
+        <p>Date: {{ appointment.appointment_date | date: 'dd/MM/yyyy' }}</p>
+        <p>Time: {{ appointment.appointment_time }}</p>
+        <p>Status: {{ appointment.status }}</p>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-primary" (click)="editAppointment(appointment)">Edit</button>
+        <button class="btn btn-danger" (click)="deleteAppointment(appointment)">Delete</button>
+      </div>
+    </div>
   </div>
 
   <div class="book-appointment-button">
     <button routerLink="/appoint">Book Appointment</button>
   </div>
 </section>
-

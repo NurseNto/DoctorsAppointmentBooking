@@ -9,6 +9,12 @@ import { Appointment } from 'src/app/models/appointment';
   styleUrls: ['./bookings.component.css']
 })
 export class BookingsComponent implements OnInit {
+editAppointment(_t6: any) {
+throw new Error('Method not implemented.');
+}
+deleteAppointment(_t6: any) {
+throw new Error('Method not implemented.');
+}
   user!: any;
   bookings: any;
 
