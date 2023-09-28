@@ -62,7 +62,7 @@ export class AppointmentComponent implements OnInit {
       appointment_time: ["", Validators.required],
       appointment_date: ["", Validators.required],
       doctor_id: [this.exampleDoctor.doctorID3, Validators.required],
-      patient_id: [this.user.patient_id, Validators.required],
+      patient_id: [this.user[0].id, Validators.required],
       notes: "",
     });
 
