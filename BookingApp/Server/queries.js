@@ -27,6 +27,20 @@ const getAppointments = (request, response) => {
       response.status(200).json(results.rows)
     })
   }
+  
+  const getAppointmentsPerson = (request, response) => {
+    //const userId = request.query.patient_id; // Get the user ID from the query parameter
+    const userId = parseInt(request.params.id)
+   
+    // Modify the SQL query to filter appointments by user ID
+    pool.query('SELECT * FROM appointments WHERE patient_id = $1 ORDER BY id ASC', [userId], (error, results) => {
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results.rows);
+    });
+  }
+  
 
   const getAppointmentById = (request, response) => {
     const id = parseInt(request.params.id)
@@ -215,6 +229,7 @@ const getAppointments = (request, response) => {
 
   module.exports = {
     getAppointments,
+    getAppointmentsPerson,
     getAppointmentById,
     createAppointment,
     updateAppointment,

@@ -23,6 +23,7 @@ app.get('/', (request, response) => {
 
 // appointments endpoints and methods
 app.get('/appointments', db.getAppointments)
+app.get('/appointments/bookings/:id', db.getAppointmentsPerson)
 app.get('/appointments/:id', db.getAppointmentById)
 app.post('/appointments', db.createAppointment)
 app.put('/appointments/:id', db.updateAppointment)

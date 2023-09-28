@@ -40,8 +40,9 @@ export class AppointmentComponent implements OnInit {
   ngOnInit() {
     // Retrieve the user data from session storage
     this.user = this.session.getLoggedUser();
+
     JSON.stringify(this.user)
-    console.log('user got - ' + this.user);
+    console.log('user got - ' + this.user[0].patient_id);
     
     // check if the user variable contains valid user data before initializing the form
     if (this.user && Object.keys(this.user).length > 0){
@@ -85,7 +86,7 @@ export class AppointmentComponent implements OnInit {
       .createAppointment(this.appointmentForm.value)
       .subscribe((response) => {
         console.log("Appointment created successfully:", response);
-       // window.location.reload();
+        window.location.reload();
       });
   }
 }

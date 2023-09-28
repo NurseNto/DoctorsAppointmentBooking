@@ -1,0 +1,18 @@
+<!-- appointment.component.html -->
+<section class="container">
+  <h1>Welcome, {{ user.name }}</h1>
+
+  <div class="appointment-list">
+    <ul>
+      <li *ngFor="let appointment of bookings">
+        Date: {{ appointment.appointment_date | date: 'dd/MM/yyyy' }},
+        Time: {{ appointment.appointment_time }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="book-appointment-button">
+    <button routerLink="/appoint">Book Appointment</button>
+  </div>
+</section>
+

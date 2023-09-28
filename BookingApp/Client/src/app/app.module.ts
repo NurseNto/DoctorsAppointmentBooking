@@ -11,6 +11,7 @@ import { LoginComponent } from './_components/login/login.component';
 import { RegisterComponent } from './_components/register/register.component';
 import { AppointmentComponent } from './_components/appointment/appointment.component';
 import { HomeComponent } from './_components/home/home.component';
+import { BookingsComponent } from './_components/bookings/bookings.component';
 
 
 
@@ -21,7 +22,8 @@ import { HomeComponent } from './_components/home/home.component';
     LoginComponent,
     RegisterComponent,
     AppointmentComponent, 
-    HomeComponent
+    HomeComponent,
+    BookingsComponent
   ],
   imports: [
     BrowserModule,

@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       // Form is valid, perform login logic
      this.auth.login(this.loginForm.value).subscribe(res=>{
-      this.router.navigate(['/appoint']);
+      this.router.navigate(['/home']);
       console.log("success");
       this.session.saveLoggedUser(res);
       

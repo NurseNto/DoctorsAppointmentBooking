@@ -46,6 +46,18 @@ export class AppointmentService {
     } else {
       return of(undefined);
     }
+
+
   }
 
+  getAppointments(userId: number): Observable<any> {
+    // Replace 'userId' with the logged-in user's ID if needed
+    return this.http.get<any>(`${this.apiUrl}/bookings/${userId}`);
+  }
+
+
+  getAllAppointments(): Observable<Appointment[]> {
+    // Replace 'userId' with the logged-in user's ID if needed
+    return this.http.get<Appointment[]>(`${this.apiUrl}`);
+  }
 }

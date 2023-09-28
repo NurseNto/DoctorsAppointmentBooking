@@ -1,0 +1,9 @@
+/* appointment.component.css */
+@media (max-width: 768px) {
+    /* Add mobile-specific styles here */
+    .container {
+      padding: 10px;
+    }
+    /* Adjust other styles as needed */
+  }
+  
