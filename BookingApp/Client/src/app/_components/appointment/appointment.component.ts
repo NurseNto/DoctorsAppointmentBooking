@@ -61,10 +61,14 @@ export class AppointmentComponent implements OnInit {
     this.appointmentForm = this.formBuilder.group({
       appointment_time: ["", Validators.required],
       appointment_date: ["", Validators.required],
-      doctor_id: [this.exampleDoctor.doctorID3, Validators.required],
+      doctor_id: 2,
       patient_id: [this.user[0].id, Validators.required],
       notes: "",
     });
+
+  }
+
+  getDoctorId(){
 
   }
 

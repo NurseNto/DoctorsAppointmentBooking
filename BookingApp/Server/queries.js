@@ -46,7 +46,8 @@ const getAppointments = (request, response) => {
       if (error) {
         throw error
       }
-      response.status(201).send(`Apppointment added with ID: ${results.rows[0].id}`)
+      //const responseBody = { message: 'Patient added with ID: ${results.rows[0].id} '};
+      response.status(201).json(`Apppointment added with ID: ${results.rows[0].id}`)
     })
   }
 
